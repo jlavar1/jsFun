@@ -30,10 +30,10 @@ const scope = {
     // Log D: personC
 
     const result =  [
-      { A: "Ben" },
-      { B: "CardiB" },
-      { C: "CardiB" },
-      { D: "Paul" }
+      { A: 'Ben' },
+      { B: 'CardiB' },
+      { C: 'CardiB' },
+      { D: 'Paul' }
     ];
     return result;
 
@@ -51,28 +51,34 @@ const scope = {
         let number = 28;
       }
 
-      // Log A: number
+      // Log A: number 75 because 75 is functionally scoped. The number is not 28 because 28 is only number within the blocked if statement. 
 
       function newNumber() {
         number = 64;
 
-        // Log B: number
+        // Log B: number 64 because log b is called within the function newNumber. Within the function new number, number is assigned a value of 64.
       }
 
       newNumber();
 
-      // Log C: number
+      // Log C: number 64 because when number was assigned to 64 within the newNumber function, the value of 64 was a global value that affected the upmost "number" of the numberFunction, which was 75 and is now 64. 
     }
 
     numberFunction();
 
-    // Log D: number
+    // Log D: number 30 because the number was globally scoped and was not mutated. The log d was called outside of the functions and the block scopes, so it must log the global number. 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{A: 75}, {B: 64}, {C: 64}, {D: 30}];
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+      // Log A: number 75 because 75 is functionally scoped. The number is not 28 because 28 is only number within the blocked if statement. 
+
+      // Log B: number 64 because log b is called within the function newNumber. Within the function new number, number is assigned a value of 64.
+
+      // Log C: number 64 because when number was assigned to 64 within the newNumber function, the value of 64 was a global value that affected the upmost "number" of the numberFunction, which was 75 and is now 64. 
+
+      // Log D: number 30 because the number was globally scoped and was not mutated. The log d was called outside of the functions and the block scopes, so it must log the global number. 
   },
 
   exerciseC() {
@@ -124,40 +130,43 @@ const scope = {
         let greeting = 'hello';
       }
 
-      // Log A: greeting
+      // Log A: greeting 'hi' because greetingGenerator is functionally scoped, so the log will first look within the function and then outside of the function for variables. 'hi' does not change to 'hello' because 'hello' is contained in a block scoped if statement. 
 
       const newGreeting = ()  => {
         greeting = 'welcome';
 
-        // Log B: greeting
+        // Log B: greeting 'welcome' because it is functionally scoped and the console log is called within the function. The assignment of 'welcome' to variable greeting will affect the uppermost greeting contained in the function. 
       };
 
       newGreeting();
 
-      // Log C: greeting
+      // Log C: greeting 'welcome' the uppermost functionally scoped greeting was assigned a value of 'welcome' within the function newGreeting. 
     };
 
     greetingGenerator();
 
-    // Log D: greeting
+    // Log D: greeting 'howdy' because this is a globally scoped log. 
 
-    const result = [
-      { A: },
-      { B: },
-      { C: },
-      { D: }
-    ];
+    const result = [{A: 'hi'}, {B: 'welcome'}, {C: 'welcome'}, {D: 'howdy'}];
+
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+      // Log A: greeting 'hi' because greetingGenerator is functionally scoped, so the log will first look within the function and then outside of the function for variables. 'hi' does not change to 'hello' because 'hello' is contained in a block scoped if statement. 
+
+      // Log B: greeting 'welcome' because it is functionally scoped and the console log is called within the function. The assignment of 'welcome' to variable greeting will affect the uppermost greeting contained in the function. 
+
+      // Log C: greeting 'welcome' the uppermost functionally scoped greeting was assigned a value of 'welcome' within the function newGreeting. 
+
+      // Log D: greeting 'howdy' because this is a globally scoped log. 
   },
 
   exerciseE() {
     let name = 'Brittany';
 
     function sayName() {
-      let name = 'Pam';
+      let name = 'Pam'; //nathaniel
 
       if (name === 'Pam') {
         name = 'Nathaniel';
@@ -166,19 +175,19 @@ const scope = {
           let name = 'Brittany';
         }
 
-        // Log A: name
+        // Log A: name nathaniel
       }
 
-      // Log B: name
+      // Log B: name  nathaniel
     }
 
-    // Log C: name
+    // Log C: name - Brittany because this is called first in execution phase
 
-    sayName();
+    sayName(); 
 
-    // Log D: name
+    // Log D: name  
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{C: 'Brittany'}, {A: 'Nathaniel'}, {B: 'Nathaniel'}, {D: 'Brittany'}];
     return result;
 
     // Annotation:
@@ -186,34 +195,34 @@ const scope = {
   },
 
   exerciseF() {
-    var dog = 'Spot';
+    var dog = 'Spot'; //biscuit after 210 (leaked out)
 
     function petDog() {
-      // Log A: dog
+      // Log A: dog - spot
 
       if (dog === 'Spot') {
         let dog = 'Fluffy';
       }
 
       function rollOver() {
-        // Log B: dog
+        // Log B: dog - spot
 
         dog = 'Biscuit';
 
-        // Log C: dog
+        // Log C: dog - biscuit because 210 assigned dog variable to biscuit in global
 
       }
 
       rollOver();
 
-      // Log D: dog
+      // Log D: dog - biscuit because 198 biscuit is new dog
     }
 
     petDog();
 
-    // Log E: dog
+    // Log E: dog - biscuit because global dog is biscuit  after 210
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{A: 'Spot'}, {B: 'Spot'}, {C: 'Biscuit'}, {D: 'Biscuit'}, {E: 'Biscuit'}];
     return result;
 
     // Annotation:
@@ -221,7 +230,7 @@ const scope = {
   },
 
   exerciseG() {
-    var fruit = 'apple';
+    var fruit = 'apple'; 
 
     function eatFruit() {
 
@@ -229,21 +238,21 @@ const scope = {
         var fruit = 'mango';
 
         if (fruit) {
-          // Log A: fruit
+          // Log A: reference error
           const fruit = 'strawberry';
         }
 
-        // Log B: fruit
+        // Log B: fruit mango
       }
 
-      // Log C: fruit
+      // Log C: fruit mango
     }
 
     eatFruit();
 
-    // Log D: fruit
+    // Log D: fruit 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{A: 'reference error'}, {B: 'mango'}, {C: 'mango'}, {D: 'apple'}];
     return result;
 
     // Annotation:
@@ -256,7 +265,7 @@ const scope = {
     const fn1 = function() {
       let num = 4;
 
-      // Log A: num
+      // Log A: num 4
 
       if (num < 5) {
         const num = 9;
@@ -265,25 +274,26 @@ const scope = {
 
         const newNum = num;
 
-        // Log B: newNum
+        // Log B: newNum 9
       }
 
-      newNum = num;
+      newNum = num; 
 
-      // Log C: newNum
+      // Log C: newNum 
     };
 
     const fn2 = function(num){
-      // Log D: num
+      // Log D: num 9
 
-      num = num + 1;
+      num = num + 1; //num 
 
-      // Log E: num
+      // Log E: num 
     };
 
     fn1();
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{A: 4}, {D: 9}, {E: 10}, {B: 9}, {C: 4}];
+
     return result;
 
     // Annotation:
@@ -291,30 +301,30 @@ const scope = {
   },
 
   exerciseI() {
-    var hunger = 100;
+    var hunger = 100; //75 after line 307 executes //80 after line 321 executes//55 after 307 executes for the second time
 
     function eatSnack() {
       hunger -= 25;
-      // Log A: hunger
+      // Log A: hunger 75 // look at the global hunger variable, see that it is 80 and subtract 25 to make it 55.
       gorgeYourself();
 
       function gorgeYourself() {
         const hunger = 0;
-        // Log B: hunger
+        // Log B: hunger 0 does not change and cannot be affected because it is a constant variable. it is also block scoped, so it does not leak out. // still 0 the second time around. Above still applies as it is constant variable and block scoped.
       }
 
-      // Log C: hunger
+      // Log C: hunger 75 because uppermost hunger is 75 after line 307 is executed. // check 
     }
 
     eatSnack();
 
     hunger += 5;
-    // Log D: hunger
+    // Log D: hunger 80 because we add 5 to the global hunger variable 
 
     eatSnack();
-    // Log E: hunger
+    // Log E: hunger check the global hunger variable and see that it is 55 after line 307 executes again. 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = [{A: 75}, {B: 0}, {C: 75}, {D: 80}, {A: 55}, {B: 0}, {C: 55}, {E: 55}];
     return result;
 
     // Annotation:
